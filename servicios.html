@@ -1,0 +1,305 @@
+<form >
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+      <h2>Cotizaciones</h2>
+    </div>
+  </div>
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <!-- Datos del Solicitante -->
+    <div class="row">
+      <div class="col-md-3 col-lg-3">
+      </div>
+      <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title">
+            <h5>Datos del solicitante
+              <br>
+              <small>* Campos obligatorios</small>
+            </h5>
+            <div ibox-tools></div>
+            <div class="ibox-content" style="display:none;">
+              <div class="row">
+                <div class="col-lg-3">
+                  <label>Fecha *</label>
+                  <div class="input-group">
+                    <input type="text" id="fecha" is-open="calendar.opened" datepicker-options="dateOptions" 
+                    ng-click="open_calendar()" uib-datepicker-popup="dd-MMMM-yyyy"
+                    class="form-control" ng-model="fecha_solicitud" placeholder="Fecha de solicitud">
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="button" ng-click="open_calendar()">
+                        <i class="fa sm fa-calendar"></i>
+                      </button>
+                    </span>
+                  </div>  
+                  <!-- {{fecha_solicitud}} -->
+                </div>
+
+                <!-- Datos del cliente -->
+                <div class="col-lg-3">
+                  <label>Cliente *</label>
+                  <div class="input-group"> 
+                    <select class="form-control" ng-model ="cliente_id" ng-options = "cliente.id as cliente.nombre+' - '+cliente.rfc for cliente in clientes" placeholder="Cliente" required>
+                      <option placeholder="Fecha de solicitud">Cliente</option>
+                    </select>
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="button" ng-click="borrar()" data-toggle="modal" data-target="#cliente">
+                        <i class="fa fa-plus"></i>
+                      </button>
+                    </span>           
+                  </div>
+                  <form>
+                    <!-- Formulario emergente para nuevo cliente -->
+                    <div class="modal fade" id="cliente" tabindex="-1" role="dialog" aria-labelledby="titulo" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <!-- Encabezado de la ventana -->
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                              <h4 class="modal-title"> <strong>Cliente nuevo</strong></h4>
+                              <small>* Campos obligatorios</small>
+                            </div>
+                            <!-- Contenido de la ventana -->
+                            <div class="modal-body">
+                              <label>Razón Social *</label>
+                              <input type="text" ng-model="nombre" class="form-control" required />
+                              <label>Nombre corto *</label>
+                              <input type="text" ng-model="nomcorto" class="form-control" required />
+                              <label>RFC *</label>
+                              <input type="text" ng-model="rfc" class="form-control" required >
+                              <div ng-show="ver">
+                                <label>Calle</label>
+                                <input type="text" ng-model="calle" class="form-control">
+                                <label>Núm. exterior:</label>
+                                <input type="text" ng-model="numExt" class="form-control">
+                                <label>Núm. int:</label>
+                                <input type="text" ng-model="numInt" class="form-control">
+                                <label>Colonia:</label>
+                                <input type="text" ng-model="colonia" class="form-control">
+                                <label>Localidad:</label>
+                                <input type="text" ng-model="localidad" class="form-control">
+                                <label>Estado:</label>
+                                <input type="text" ng-model="estado" class="form-control">
+                                <label>CP:</label>
+                                <input type="text" ng-model="CP" class="form-control">
+                              </div>
+                            </div>
+                            <!-- Footer de la ventana -->
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-warning" name="btnMostrar" ng-click="mostrar()">Más datos</button>
+                              <button type="button" class="btn btn-default" ng-click="cerrar()" data-dismiss="modal">Cerrar</button>
+                              <button type="button" class="btn btn-success" ng-model="guardar" ng-click="guardar()" >Guardar</button>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    <!-- Fin: Formulario emergente para nuevo solicitante -->
+                  </form>
+                </div>
+                <!-- Fin: Datos del cliente -->
+
+                <div class="col-lg-3">
+                  <label>Solicitante *</label>
+                  <div class="input-group">
+                    <select class="form-control">
+                      <option>Solicitante</option>
+                    </select>
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fa fa-plus"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <label>Correo *</label>
+                  <div class="input-group">
+                    <select class="form-control">
+                      <option>Correo</option>
+                    </select>
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fa fa-plus"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin: Datos del Solicitante -->
+
+    <!-- Datos del Proyecto -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title">
+            <h5>Datos del proyecto
+              <br>
+              <small>* Campos obligatorios</small>
+            </h5>
+            <div ibox-tools></div>
+            <div class="ibox-content" style="display:none;">
+              <div class="row">
+                <div class="col-lg-4">
+                  <label>Tecnología *</label>
+                  <div class="input-group">
+                    <select class="form-control" chosen ng-model="proyecto.id_tecnologia" ng-options="tecnologia.id as tecnologia.nombre for tecnologia in tecnologias">
+                      <option></option>
+                    </select>
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fa fa-question"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <label>Tipo de producto *</label>
+                  <div class="input-group">
+                    <select class="form-control" chosen ng-model="proyecto.id_tipo_producto" ng-options="tipo_producto as tipo_producto.nombre for tipo_producto in tipos_productos">
+                      <option></option>
+                    </select>
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fa fa-question"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <label>Producto *</label>
+                  <div class="input-group">
+                    <select class="form-control" chosen ng-model="proyecto.id_producto" ng-options="tecnologia.id as tecnologia.nombre for tecnologia in productos">
+                      <option></option>
+                    </select>
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fa fa-question"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <label>Cuenta *</label>
+                  <div class="input-group">
+                    <select class="form-control" chosen ng-model="proyecto.id_cuenta" ng-options="cuenta.id as cuenta.nombre for cuenta in cuentas">
+                      <option></option>
+                    </select>
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fa fa-question"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <label>Cliente *</label>
+                  <div class="input-group">
+                    <select class="form-control" chosen ng-model="proyecto.id_cliente" ng-options="cliente.id as cliente.nombre for cliente in clientes">
+                      <option></option>
+                    </select>
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fa fa-question"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin: Datos del Proyecto -->
+
+    <!-- Alcance del proyecto -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title">
+            <h5>Alcance del proyecto
+              <br>
+              <small>* Campos obligatorios</small>
+            </h5>
+            <div ibox-tools></div>
+            <div class="ibox-content" style="display:none;">
+              <!-- Primer fila -->
+              <div class="row">
+                <div class="col-lg-4">
+                  <label>Actividad *</label>
+                  <div class="input-group">
+                    <select class="">
+                      <option>Actividad</option>
+                    </select>
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fa fa-question"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <label>Estado *</label>
+                  <div class="input-group">
+                    <select class="">
+                      <option>Estado</option>
+                    </select>
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fa fa-question"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <label>Localidad *</label>
+                  <div class="input-group">
+                    <select class="">
+                      <option>Loclalidad</option>
+                    </select>
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fa fa-question"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-lg-2">
+                  <label>Región *</label>
+                  <div class="input-group">
+                    <input type="text">
+                  </div>
+                </div>
+                <!-- Fin: Primer fila -->
+
+                <!-- Otra fila -->
+                
+                  <div class="col-lg-4">
+                  <label>Descripción: *</label>
+                    <div class="input-group">
+                      <textarea name="comment" form="usrform">Descripción del proyecto...</textarea>
+                      <span class="input-group-btn">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fa fa-question"></i>
+                      </button>
+                      </span>
+                    </div>
+                  </div>
+                
+                <!-- Fin: Otra fila -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin: Alcance del proyecto -->
+
+  </div>
+</form>
